@@ -33,13 +33,16 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2">
             <Link to="/" className="flex items-center gap-2 font-display text-lg font-semibold">
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-heading-light dark:bg-accent-dark font-mono text-sm text-white dark:text-slate-900">
-                &lt;/&gt;
-              </span>
+              {COMPANY.logo ? (
+                <img src={COMPANY.logo} alt={COMPANY.name} className="h-10 w-auto object-contain" />
+              ) : (
+                <span className="flex h-8 w-8 items-center justify-center rounded-md bg-heading-light dark:bg-accent-dark font-mono text-sm text-white dark:text-slate-900">
+                  &lt;/&gt;
+                </span>
+              )}
               {COMPANY.name}
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed">{COMPANY.tagline}</p>
-            
           </div>
 
           {COLUMNS.map((col) => (
@@ -60,7 +63,6 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-slate-200/70 dark:border-slate-700/60 pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {COMPANY.name}. All rights reserved.</p>
-          
         </div>
       </div>
     </footer>
