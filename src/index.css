@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-canvas-light dark:bg-canvas-dark text-body-light dark:text-body-dark font-body antialiased transition-colors duration-300;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-heading-light dark:text-heading-dark;
+  }
+  ::selection {
+    @apply bg-accent/20;
+  }
+  *:focus-visible {
+    outline: 2px solid #00D2C4;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-xs tracking-wide text-accent dark:text-accent-dark uppercase;
+  }
+  .container-page {
+    @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-10;
+  }
+  .card-surface {
+    @apply bg-surface-light dark:bg-surface-dark border border-slate-200/70 dark:border-slate-700/60 rounded-2xl shadow-card;
+  }
+}
+
+/* Scroll-reveal (used by components/ui/Reveal.jsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 24px));
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* Never hide content for reduced-motion users */
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Content authored in the admin panel's rich text editor (see RichText.jsx).
+   Jodit outputs plain HTML with no classes, so give those tags sane spacing. */
+.rich-text {
+  font-size: 1.0625rem;   /* ~17px, thoda bada base text */
+  line-height: 1.8;
+}
+.rich-text > * + * {
+  margin-top: 1rem;
+}
+.rich-text p {
+  @apply text-black dark:text-white font-semibold;
+}
+.rich-text strong,
+.rich-text b {
+  @apply text-black dark:text-white font-semibold;
+}
+.rich-text ul,
+.rich-text ol {
+  padding-left: 1.25rem;
+  list-style: revert;
+}
+.rich-text li + li {
+  margin-top: 0.35rem;
+}
+.rich-text li::marker {
+  @apply text-accent dark:text-accent-dark;
+}
+.rich-text a {
+  @apply text-accent dark:text-accent-dark;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.rich-text h2,
+.rich-text h3 {
+  @apply font-display text-black dark:text-white;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.rich-text h2 { font-size: 1.5rem; }
+.rich-text h3 { font-size: 1.25rem; }
+.rich-text img {
+  border-radius: 0.75rem;
+  max-width: 100%;
+  height: auto;
+}
