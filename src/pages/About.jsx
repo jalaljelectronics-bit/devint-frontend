@@ -11,7 +11,7 @@ import ErrorState from '../components/ui/ErrorState.jsx'
 import EmptyState from '../components/ui/EmptyState.jsx'
 import { useAsync } from '../lib/useAsync.js'
 import { getTeam } from '../lib/api.js'
-import { COMPANY } from '../data/mockData.js'
+
 
 const VALUES = [
   { icon: Target, title: 'Ship what matters', body: 'We scope ruthlessly around the features that move the metric you actually care about.' },
@@ -44,7 +44,9 @@ const CEO = {
 // stopPropagation keeps clicks from being swallowed by the TiltCard's own handlers.
 function MemberLinks({ links, variant = 'light' }) {
   if (!links) return null
+
   const { linkedin, email, github } = links
+
   if (!linkedin && !email && !github) return null
 
   const base =
@@ -66,6 +68,7 @@ function MemberLinks({ links, variant = 'light' }) {
           <Linkedin size={16} />
         </a>
       )}
+
       {email && (
         <a
           href={`mailto:${email}`}
@@ -76,6 +79,7 @@ function MemberLinks({ links, variant = 'light' }) {
           <Mail size={16} />
         </a>
       )}
+
       {github && (
         <a
           href={github}
@@ -91,7 +95,6 @@ function MemberLinks({ links, variant = 'light' }) {
     </div>
   )
 }
-
 export default function About() {
   const team = useAsync(getTeam, [])
 
@@ -271,7 +274,7 @@ export default function About() {
             <EmptyState title="No team members published yet" />
           )}
           {team.status === 'success' && rest.length > 0 && (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
               {rest.map((member, i) => (
                 <Reveal key={member.id} delay={i * 100}>
                   <TiltCard max={8} className="rounded-2xl">
@@ -280,12 +283,12 @@ export default function About() {
                         <img
                           src={member.photo}
                           alt={member.name}
-                          className="h-56 sm:h-72 lg:h-96 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="h-48 sm:h-56 lg:h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           loading="lazy"
                         />
                       </div>
-                      <div className="p-5">
-                        <p className="font-display text-lg font-semibold">{member.name}</p>
+                      <div className="p-4">
+                        <p className="font-display text-base font-semibold">{member.name}</p>
                         <p className="text-sm">{member.role}</p>
                         <MemberLinks links={member.links} variant="dark" />
                       </div>
