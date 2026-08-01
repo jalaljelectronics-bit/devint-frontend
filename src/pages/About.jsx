@@ -274,7 +274,7 @@ export default function About() {
             <EmptyState title="No team members published yet" />
           )}
           {team.status === 'success' && rest.length > 0 && (
-            <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
               {rest.map((member, i) => (
                 <Reveal key={member.id} delay={i * 100}>
                   <TiltCard max={8} className="rounded-2xl">
