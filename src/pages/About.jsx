@@ -33,7 +33,14 @@ const CEO = {
   message:
     'Real innovation begins when you stop showcasing technology and start solving human problems. That\u2019s the standard we hold every project to.',
 }
-
+const CO_FOUNDER = {
+  name: 'Dr. Rida Fatima',
+  role: 'Co-Founder',
+  photo: 'https://res.cloudinary.com/r2fk1fws/image/upload/v1785665788/WhatsApp_Image_2026-08-02_at_2.06.59_PM_pvdsye.jpg',
+  message:
+    'By combining clinical insight with technology, we help develop reliable and user-friendly digital solutions that improve clinical and administrative workflows.',
+  bio: 'A medical professional with expertise in healthcare software and medical billing solutions.',
+}
 // const TEAM = [
 //   { name: 'Bilal Raza', role: 'Head of Design', photo: 'https://i.pravatar.cc/200?img=13' },
 //   { name: 'Hamza Iqbal', role: 'Mobile Lead', photo: 'https://i.pravatar.cc/200?img=14' },
@@ -205,34 +212,24 @@ export default function About() {
           ))}
         </div>
       </section>
-
-      {/* DIRECTOR MESSAGE */}
-      <section className="container-page py-20">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
-          <Reveal>
-            <div className="relative">
-              <img
-                src={CEO.photo}
-                alt={CEO.name}
-                className="h-96 w-full rounded-2xl object-cover sm:h-[440px]"
-                loading="lazy"
-              />
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-accent/10 blur-2xl"
-              />
-            </div>
-          </Reveal>
-
-          <Reveal delay={150}>
+{/* DIRECTOR MESSAGE */}
+      <section className="container-page pt-8 pb-2">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
+         <img
+            src={CEO.photo}
+            alt={CEO.name}
+            className="h-[320px] w-full max-w-md object-cover sm:h-[380px] lg:mr-auto"
+            loading="lazy"
+          />
+       <Reveal delay={150} className="lg:flex lg:h-full lg:flex-col lg:justify-center">
             <SectionHeading
               title="A message from our CEO"
             />
-            <blockquote className="mt-5 max-w-xl text-lg leading-relaxed text-body dark:text-body-dark">
+            <blockquote className="mt-3 max-w-2xl text-base leading-relaxed text-body dark:text-body-dark">
               &ldquo;{CEO.message}&rdquo;
             </blockquote>
-            <div className="mt-6">
-              <p className="font-display text-lg font-semibold">{CEO.name}</p>
+            <div className="mt-4">
+              <p className="font-display text-base font-semibold">{CEO.name}</p>
               <p className="text-sm text-body/70 dark:text-body-dark/70">{CEO.role}</p>
             </div>
           </Reveal>

@@ -22,10 +22,10 @@ export const seedSettings = {
   companyName: 'DevInt.Tech',
   tagline: 'We build the software behind growing businesses.',
   foundedYear: 2016,
-  logo: 'https://res.cloudinary.com/r2fk1fws/image/upload/v1784547440/WhatsApp_Image_2026-07-20_at_16.02.53-removebg-preview_1_bfpl0k.png',
-  contactEmail: 'hello@devint.tech',
-  contactPhone: '+92 300 1234567',
-  officeAddress: 'Suite 4B, Gulgasht Colony, Multan, Punjab, Pakistan',
+  logo: 'https://res.cloudinary.com/r2fk1fws/image/upload/v1785665444/WhatsApp_Image_2026-08-02_at_3.08.16_PM-removebg-preview_oknehj.png',
+  contactEmail: 'info@devint.tech',
+  contactPhone: '+92 3225196666',
+  officeAddress: 'Citi Mall 2nd floor,Gulgasht Colony,Multan.',
   social: {
     linkedin: 'https://linkedin.com/company/devint-tech',
     twitter: 'https://x.com/devinttech',
@@ -508,7 +508,7 @@ export const seedLeads = [
 // localStorage on first run.
 export function buildSeedDb() {
   return {
-    __version: 2, // bump this any time seed.js data (like the logo) changes
+    __version: 3, // bump this any time seed.js data (like the logo) changes
     settings: JSON.parse(JSON.stringify(seedSettings)),
     services: JSON.parse(JSON.stringify(seedServices)),
     portfolio: JSON.parse(JSON.stringify(seedPortfolio)),
