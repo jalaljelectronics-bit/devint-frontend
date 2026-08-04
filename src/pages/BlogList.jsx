@@ -53,7 +53,7 @@ export default function BlogList() {
           className="pointer-events-none absolute -top-16 right-1/4 h-56 w-56 rounded-full bg-accent/5 blur-3xl"
         />
         <div className="relative container-page flex flex-col items-center py-24 text-center sm:py-32">
-          <p className="font-mono text-xs uppercase tracking-wide text-accent"> </p>
+          <p className="font-mono text-xs uppercase tracking-wide text-accent">Insights & Updates</p>
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             Blog
           </h1>
@@ -70,7 +70,7 @@ export default function BlogList() {
 
       <section className="container-page py-20">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading  title="Notes from the team" description="What we're learning while building client software week to week." />
+          <SectionHeading title="Notes from the team" description="What we're learning while building client software week to week." />
           <div className="relative">
             <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2" />
             <input
@@ -97,14 +97,14 @@ export default function BlogList() {
                 {paged.map((post, i) => (
                   <Reveal key={post.id} delay={(i % 3) * 100}>
                     <Link to={`/blog/${post.slug}`} className="group card-surface block overflow-hidden">
-                    <div className="overflow-hidden">
-                      <img src={post.coverImage} alt={post.title} loading="lazy" className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                    </div>
-                    <div className="p-5">
-                      
-                      <h3 className="font-display text-base font-semibold leading-snug">{post.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed line-clamp-2">{post.excerpt}</p>
-                      <p className="mt-4 text-xs">{post.authorName} · {new Date(post.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                      <div className="overflow-hidden">
+                        <img src={post.coverImage} alt={post.title} loading="lazy" className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      </div>
+                      <div className="p-5">
+                        <p className="text-xs font-medium uppercase tracking-wide text-accent">{post.category}</p>
+                        <h3 className="mt-2 font-display text-base font-semibold leading-snug">{post.title}</h3>
+                        <p className="mt-2 text-sm leading-relaxed line-clamp-2">{post.excerpt}</p>
+                        <p className="mt-4 text-xs">{post.authorName} · {new Date(post.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</p>
                       </div>
                     </Link>
                   </Reveal>

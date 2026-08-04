@@ -18,9 +18,9 @@ export default {
           dark: '#F8FAFC',
         },
         body: {
-  light: '#000000',
-  dark: '#FFFFFF',
-},
+          light: '#000000',
+          dark: '#FFFFFF',
+        },
         accent: {
           DEFAULT: '#00D2C4',
           dark: '#00E6D7',
@@ -45,7 +45,28 @@ export default {
       animation: {
         fadeUp: 'fadeUp 0.6s ease-out both',
       },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': theme('colors.body.light'),
+            '--tw-prose-headings': theme('colors.heading.light'),
+            '--tw-prose-links': theme('colors.accent.DEFAULT'),
+            '--tw-prose-bold': theme('colors.heading.light'),
+            '--tw-prose-quotes': theme('colors.heading.light'),
+            '--tw-prose-code': theme('colors.heading.light'),
+            '--tw-prose-invert-body': theme('colors.body.dark'),
+            '--tw-prose-invert-headings': theme('colors.heading.dark'),
+            '--tw-prose-invert-links': theme('colors.accent.dark'),
+            '--tw-prose-invert-bold': theme('colors.heading.dark'),
+            '--tw-prose-invert-quotes': theme('colors.heading.dark'),
+            '--tw-prose-invert-code': theme('colors.heading.dark'),
+            maxWidth: 'none',
+            a: { textDecoration: 'none', fontWeight: '500' },
+            'a:hover': { textDecoration: 'underline' },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

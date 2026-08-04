@@ -9,6 +9,11 @@ import { useAsync } from '../lib/useAsync.js'
 import { getBlogBySlug } from '../lib/api.js'
 import RichText from '../components/ui/RichText.jsx'
 
+function readingTime(html) {
+  const words = String(html).replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length
+  return Math.max(1, Math.round(words / 200))
+}
+
 export default function BlogDetail() {
   const { slug } = useParams()
   const post = useAsync(() => getBlogBySlug(slug), [slug])
@@ -31,17 +36,17 @@ export default function BlogDetail() {
 
       <article className="container-page max-w-3xl py-20">
         <Reveal>
-          
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-5xl">{b.title}</h1>
+          <p className="text-xs font-medium uppercase tracking-wide text-accent">{b.category}</p>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">{b.title}</h1>
           <p className="mt-4 text-sm">
-            {b.authorName} · {new Date(b.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+            {b.authorName} · {new Date(b.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} · {readingTime(b.content)} min read
           </p>
         </Reveal>
         <Reveal delay={100}>
           <img src={b.coverImage} alt={b.title} className="mt-10 h-64 w-full rounded-2xl object-cover sm:h-96" loading="lazy" />
         </Reveal>
         <Reveal delay={150}>
-          <RichText html={b.content} className="mt-10 text-base leading-relaxed" />
+          <RichText html={b.content} className="mt-10" />
         </Reveal>
 
         <Reveal>
