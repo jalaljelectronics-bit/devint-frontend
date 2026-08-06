@@ -1,3 +1,4 @@
+// src/pages/BlogDetail.jsx
 import { useParams } from 'react-router-dom'
 import Seo from '../components/ui/Seo.jsx'
 import Spinner from '../components/ui/Spinner.jsx'
@@ -9,8 +10,14 @@ import { useAsync } from '../lib/useAsync.js'
 import { getBlogBySlug } from '../lib/api.js'
 import RichText from '../components/ui/RichText.jsx'
 
-function readingTime(html) {
-  const words = String(html).replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length
+function readingTime(content) {
+  if (!content || typeof content !== 'string') return 1
+  const words = content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/<[^>]+>/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length
   return Math.max(1, Math.round(words / 200))
 }
 
@@ -28,25 +35,29 @@ export default function BlogDetail() {
     )
   }
 
-  const b = post.data
+  const b = post.data || {}
 
   return (
     <>
-      <Seo title={b.title} description={b.excerpt} />
+      <Seo title={b.title || 'Blog Post'} description={b.excerpt || ''} />
 
       <article className="container-page max-w-3xl py-20">
         <Reveal>
-          <p className="text-xs font-medium uppercase tracking-wide text-accent">{b.category}</p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">{b.title}</h1>
+          <p className="text-xs font-medium uppercase tracking-wide text-accent">{b.category || 'General'}</p>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">{b.title || ''}</h1>
           <p className="mt-4 text-sm">
-            {b.authorName} · {new Date(b.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} · {readingTime(b.content)} min read
+            {b.authorName || 'Admin'} · {b.publishedAt ? new Date(b.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''} · {readingTime(b.content)} min read
           </p>
         </Reveal>
-        <Reveal delay={100}>
-          <img src={b.coverImage} alt={b.title} className="mt-10 h-64 w-full rounded-2xl object-cover sm:h-96" loading="lazy" />
-        </Reveal>
+        
+        {b.coverImage && (
+          <Reveal delay={100}>
+            <img src={b.coverImage} alt={b.title || 'Cover image'} className="mt-10 h-64 w-full rounded-2xl object-cover sm:h-96" loading="lazy" />
+          </Reveal>
+        )}
+
         <Reveal delay={150}>
-          <RichText html={b.content} className="mt-10" />
+          <RichText html={b.content || ''} className="mt-10" />
         </Reveal>
 
         <Reveal>
