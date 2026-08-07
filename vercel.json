@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/sitemap.xml",
+      "destination": "https://devint-backend-production.up.railway.app/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "https://devint-backend-production.up.railway.app/robots.txt"
+    },
+    {
       "source": "/((?!assets/|.*\\.(?:js|css|png|jpg|jpeg|svg|ico|json|woff2?|ttf|map)$).*)",
       "destination": "/index.html"
     }
