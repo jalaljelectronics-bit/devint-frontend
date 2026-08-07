@@ -24,6 +24,7 @@ const Privacy = lazy(() => import('./pages/Privacy.jsx'))
 const Terms = lazy(() => import('./pages/Terms.jsx'))
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
+
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
