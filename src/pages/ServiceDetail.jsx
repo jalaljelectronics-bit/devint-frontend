@@ -9,7 +9,7 @@ import EmptyState from '../components/ui/EmptyState.jsx'
 import Reveal from '../components/ui/Reveal.jsx'
 import { useAsync } from '../lib/useAsync.js'
 import { getServiceBySlug } from '../lib/api.js'
-import { textToHtml, decodeCommonEntities } from '../lib/textToHtml.js'
+import { decodeCommonEntities } from '../lib/textToHtml.js'
 import RichText from '../components/ui/RichText.jsx'
 
 export default function ServiceDetail() {
@@ -48,7 +48,16 @@ export default function ServiceDetail() {
 
         <div className="mt-10 grid grid-cols-1 items-center gap-10 lg:grid-cols-[3fr_2fr]">
           <Reveal>
-            <RichText html={textToHtml(s.description)} className="text-base leading-relaxed" />
+            {/* description is authored as Markdown (same as Blog content) —
+                pass it straight to RichText, which defaults to parsing
+                Markdown via ReactMarkdown. Do NOT pre-process with
+                textToHtml() first: that wraps the string in <p>/<ul>/<li>
+                tags without actually converting Markdown syntax, and since
+                RichText's isHtml defaults to false, ReactMarkdown then
+                treats those tags as literal text instead of rendering them
+                — which is what was causing raw <p>/##/** to show up on the
+                page. */}
+            <RichText html={s.description} className="text-base leading-relaxed" />
           </Reveal>
 
           {heroImage ? (
@@ -73,7 +82,7 @@ export default function ServiceDetail() {
                 <h3 className="mt-3 font-display font-semibold">
                   {decodeCommonEntities(sub.title)}
                 </h3>
-                <RichText html={textToHtml(sub.description)} className="mt-2 text-sm leading-relaxed" />
+                <RichText html={sub.description} className="mt-2 text-sm leading-relaxed" />
               </Card>
             </Reveal>
           ))}
