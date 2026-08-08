@@ -60,6 +60,26 @@ export default function BlogDetail() {
           <RichText html={b.content || ''} className="mt-10" />
         </Reveal>
 
+        {/* NEW — related service / portfolio links, populated once
+            blog.util.js's serializer passes relatedService/relatedPortfolio
+            through (each shaped { id, title, slug } or null). */}
+        {(b.relatedService || b.relatedPortfolio) && (
+          <Reveal delay={175}>
+            <div className="mt-10 flex flex-wrap gap-3">
+              {b.relatedService && (
+                <Button to={`/services/${b.relatedService.slug}`} variant="outline">
+                  Related service: {b.relatedService.title}
+                </Button>
+              )}
+              {b.relatedPortfolio && (
+                <Button to={`/portfolio/${b.relatedPortfolio.slug}`} variant="outline">
+                  Related project: {b.relatedPortfolio.title}
+                </Button>
+              )}
+            </div>
+          </Reveal>
+        )}
+
         <Reveal>
           <div className="mt-14 border-t border-slate-200/70 dark:border-slate-700/60 pt-8">
             <Button to="/blog" variant="outline">Back to all articles</Button>
